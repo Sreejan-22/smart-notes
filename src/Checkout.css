@@ -1,0 +1,125 @@
+.checkout-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+/* .checkout-container * {
+  margin: 0;
+  padding: 0;
+} */
+
+.left-card,
+.right-card {
+  width: 50%;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.left-card {
+  background-color: black;
+  border: 1px solid #707070;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.checkout-placeholder-img {
+  width: 80%;
+  height: 33%;
+}
+
+.right-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* .right-card * {
+  width: 60%;
+} */
+
+.right-card input {
+  height: 40px;
+  /* width: 100%; */
+  outline: none;
+  /* box-shadow: 0px 3px 6px #00000029; */
+  border: 1px solid #7070704d;
+  border-radius: 10px;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.right-card form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-card label {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+}
+
+.card-number {
+  height: 28px;
+  /* box-shadow: 0px 0px 6px #00000029; */
+  border: 1px solid #7070704d;
+  border-radius: 10px 10px 0px 0px;
+  /* border-bottom: ; */
+  padding-top: 12px;
+  padding-left: 10px;
+}
+
+/* .card-number .__PrivateStripeElement {
+  padding: 10px !important;
+} */
+
+.card-expiry {
+  width: 50%;
+  height: 28px;
+  border-radius: 0px 0px 0px 10px;
+  /* box-shadow: 0px 2px 6px #00000029; */
+  border: 1px solid #7070704d;
+  border-top: 0;
+  margin-bottom: 16px;
+  padding-top: 12px;
+  padding-left: 10px;
+}
+
+/* .card-expiry .__PrivateStripeElement {
+  padding: 10px !important;
+} */
+
+.card-cvc {
+  width: 50%;
+  height: 28px;
+  border-radius: 0px 0px 10px 0px;
+  /* box-shadow: 0px 2px 6px #00000029; */
+  border: 1px solid #7070704d;
+  border-top: 0;
+  margin-bottom: 16px;
+  padding-top: 12px;
+  padding-left: 10px;
+}
+
+/* .__PrivateStripeElement {
+  padding: 10px !important;
+} */
+
+@media only screen and (max-width: 1480px) {
+  .checkout-placeholder-img {
+    width: 70%;
+    height: 25%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .checkout-placeholder-img {
+    width: 60%;
+    height: 20%;
+  }
+}
