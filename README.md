@@ -1,3 +1,5 @@
-# Checkout page with stripe elements built with the help of stripe-js and react-srtipe-js
+# infinite-scroll-react
+
+An implementation of infinte scroll feature using React.js. This website loads sample text continuously as the user scrolls down the page.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

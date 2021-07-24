@@ -1,22 +1,22 @@
-import React from "react";
-// import { Switch, Route } from "react-router-dom";
-// import Notes from "./pages/Notes";
-// import Create from "./pages/Create";
-import Checkout from "./Checkout";
+import React, { useState } from "react";
+import "./App.css";
 
 const App = () => {
   return (
-    // <Switch>
-    //   <Route path="/create">
-    //     <Create />
-    //   </Route>
-    //   <Route path="/">
-    //     <Notes />
-    //   </Route>
-    // </Switch>
-    <React.Fragment>
-      <Checkout />
-    </React.Fragment>
+    <div>
+      <h1>Infinite Scroll</h1>
+      <div className="container">
+        <div className="post">
+          <h2 class="title">Blog Title</h2>
+          <p class="text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Blanditiis, ipsam voluptas! Quis nobis vel architecto mollitia natus
+            eos esse commodi temporibus. Nostrum deserunt dolore repellendus?
+            Dicta minima consequuntur quis harum.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 
