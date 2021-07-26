@@ -1,10 +1,14 @@
-.container {
-  margin: 0 auto;
-  width: 600px;
+.app {
+  text-align: center;
 }
 
-.blog-post {
-  border: 1px solid black;
-  padding: 40px;
-  margin: 20px 0;
+button {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: rgb(6, 93, 255);
+  color: white;
 }
