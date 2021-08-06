@@ -1,14 +1,4 @@
-.app {
-  text-align: center;
-}
-
-button {
-  cursor: pointer;
-  width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background-color: rgb(6, 93, 255);
-  color: white;
+* {
+  margin: 0;
+  padding: 0;
 }
