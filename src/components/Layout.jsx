@@ -10,6 +10,10 @@ import SubjectOutlinedIcon from "@material-ui/icons/SubjectOutlined";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import Avatar from "@material-ui/core/Avatar";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import PersonIcon from "@material-ui/icons/Person";
 import { format } from "date-fns";
 
 const drawerWidth = 240;
@@ -51,6 +55,10 @@ const useStyles = makeStyles((theme) => {
     user: {
       color: "gray",
     },
+    avatar: {
+      marginLeft: theme.spacing(2),
+      cursor: "pointer",
+    },
   };
 });
 
@@ -80,7 +88,10 @@ const Layout = ({ children }) => {
           <Typography className={classes.date}>
             {format(new Date(), "do MMMM y")}
           </Typography>
-          <Typography className={classes.user}>Sreejan</Typography>
+          <Typography className={classes.user}>User</Typography>
+          <Avatar className={classes.avatar}>
+            <PersonIcon />
+          </Avatar>
         </Toolbar>
       </AppBar>
 

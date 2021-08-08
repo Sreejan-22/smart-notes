@@ -9,6 +9,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import NotesCard from "../NotesCard";
+import Masonry from "react-masonry-css";
+import "./Notes.css";
 
 // const useStyles = makeStyles({
 //   btn: {
@@ -49,16 +51,33 @@ const Notes = () => {
     setNotes(newNotes);
   };
 
+  const breakPoints = {
+    default: 3,
+    1100: 2,
+    700: 1,
+  };
+
   return (
     <div>
       <Container>
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           {notes.map((note) => (
             <Grid item xs={12} md={6} lg={4} key={note.id}>
               <NotesCard note={note} handleDelete={handleDelete} />
             </Grid>
           ))}
-        </Grid>
+        </Grid> */}
+        <Masonry
+          breakpointCols={breakPoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {notes.map((note) => (
+            <div item xs={12} md={6} lg={4} key={note.id}>
+              <NotesCard note={note} handleDelete={handleDelete} />
+            </div>
+          ))}
+        </Masonry>
       </Container>
     </div>
   );

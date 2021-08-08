@@ -21,8 +21,38 @@
     {
       "title": "Invest in stocks",
       "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      "category": "todos",
+      "category": "money",
       "id": 4
+    },
+    {
+      "title": "Pay rent",
+      "details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime obcaecati voluptatum velit veritatis in! Iure aspernatur obcaecati doloribus vero nemo dolor quasi accusantium saepe et. Perspiciatis quas iste dicta accusamus.",
+      "category": "money",
+      "id": 5
+    },
+    {
+      "title": "Ship a feature",
+      "details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime obcaecati voluptatum velit veritatis in! Iure aspernatur obcaecati doloribus vero nemo dolor quasi accusantium saepe et. Perspiciatis quas iste dicta accusamus.Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime obcaecati voluptatum velit veritatis in! Iure aspernatur obcaecati doloribus vero nemo dolor quasi accusantium saepe et. Perspiciatis quas iste dicta accusamus.",
+      "category": "work",
+      "id": 6
+    },
+    {
+      "title": "Lorem Ipsum",
+      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
+      "category": "reminders",
+      "id": 7
+    },
+    {
+      "title": "Pay Rent",
+      "details": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime obcaecati voluptatum velit veritatis in! Iure aspernatur obcaecati doloribus vero nemo dolor quasi accusantium saepe et. Perspiciatis quas iste dicta accusamus.",
+      "category": "reminders",
+      "id": 8
+    },
+    {
+      "title": "Lorem Ipsum",
+      "details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime obcaecati voluptatum velit veritatis in! Iure aspernatur obcaecati doloribus vero nemo dolor quasi accusantium saepe et.",
+      "category": "work",
+      "id": 9
     }
   ]
 }
