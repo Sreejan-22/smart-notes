@@ -1,71 +1,65 @@
+import { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import AcUnitOutlinedIcon from "@material-ui/icons/AcUnitOutlined";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { makeStyles } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import NotesCard from "../NotesCard";
 
-const useStyles = makeStyles({
-  btn: {
-    fontSize: 60,
-    backgroundColor: "violet",
-    "&:hover": {
-      backgroundColor: "blue",
-    },
-  },
+// const useStyles = makeStyles({
+//   btn: {
+//     fontSize: 60,
+//     backgroundColor: "violet",
+//     "&:hover": {
+//       backgroundColor: "blue",
+//     },
+//   },
 
-  customText: {
-    textDecoration: "underline",
-    margin: "auto",
-  },
-});
+//   customText: {
+//     textDecoration: "underline",
+//     margin: "auto",
+//   },
+// });
 
 const Notes = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/notes")
+      .then((res) => res.json())
+      .then((data) => setNotes(data));
+  }, []);
+
+  const handleDelete = async (id) => {
+    await fetch(`http://localhost:8000/notes/${id}`, {
+      method: "DELETE",
+    });
+
+    // after deletion of the note in the db.json,
+    // which will be deployed on heroku afterwards, hoisted by json server at localhost:8000
+    // the same needs to reflect in the notes component i.e. the "notes" state variable
+    // so we make a copy of "notes" and remove the note corresponding to this particular "id"
+    // and assign the "notes" state variable this "newNotes" array
+    const newNotes = notes.filter((note) => note.id != id);
+    setNotes(newNotes);
+  };
 
   return (
     <div>
-      <Typography
-        variant="h6"
-        component="h2"
-        color="textSecondary"
-        gutterBottom
-        // style={{ marginBottom: "20px" }}
-      >
-        Create a New Note
-      </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<AcUnitOutlinedIcon />}
-        endIcon={<AddShoppingCartIcon />}
-      >
-        Sample Button
-      </Button>
-      <br />
-      <br />
-      <ButtonGroup variant="contained" color="secondary">
-        <Button>One</Button>
-        <Button>Second</Button>
-        <Button>Third</Button>
-      </ButtonGroup>
-      <br />
-      <br />
-      <Button
-        type="submit"
-        variant="contained"
-        color="secondary"
-        disableElevation
-      >
-        Submit
-      </Button>
-      <br />
-      <br />
-      <Button className={classes.btn}>Custom Styles</Button>
-      <br />
-      <Typography variant="h3" className={classes.customText}>
-        Custom Styled Text
-      </Typography>
+      <Container>
+        <Grid container spacing={3}>
+          {notes.map((note) => (
+            <Grid item xs={12} md={6} lg={4} key={note.id}>
+              <NotesCard note={note} handleDelete={handleDelete} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </div>
   );
 };
