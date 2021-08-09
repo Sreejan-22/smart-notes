@@ -5,7 +5,6 @@ import Masonry from "react-masonry-css";
 import "./Notes.css";
 
 const Notes = () => {
-  // const classes = useStyles();
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
