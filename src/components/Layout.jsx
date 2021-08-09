@@ -11,8 +11,6 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Avatar from "@material-ui/core/Avatar";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import PersonIcon from "@material-ui/icons/Person";
 import { format } from "date-fns";
 
@@ -39,6 +37,7 @@ const useStyles = makeStyles((theme) => {
     },
     title: {
       padding: theme.spacing(2),
+      cursor: "pointer",
     },
     appbar: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -127,7 +126,7 @@ const Layout = ({ children }) => {
       </Drawer>
 
       <div className={classes.page}>
-        {/* craete some space above using a div to prevent the notes from getting overlapped; height of this div needs to be equal to the height of the toolbar */}
+        {/* create some space above using a div to prevent the notes from getting overlapped; height of this div needs to be equal to the height of the toolbar */}
         <div className={classes.spaceBelowToolbar}></div>
         {children}
       </div>

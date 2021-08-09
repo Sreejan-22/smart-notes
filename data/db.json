@@ -43,16 +43,16 @@
       "id": 7
     },
     {
-      "title": "Pay Rent",
+      "title": "Update doc",
       "details": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime obcaecati voluptatum velit veritatis in! Iure aspernatur obcaecati doloribus vero nemo dolor quasi accusantium saepe et. Perspiciatis quas iste dicta accusamus.",
-      "category": "reminders",
-      "id": 8
+      "category": "work",
+      "id": 10
     },
     {
       "title": "Lorem Ipsum",
-      "details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime obcaecati voluptatum velit veritatis in! Iure aspernatur obcaecati doloribus vero nemo dolor quasi accusantium saepe et.",
+      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
       "category": "work",
-      "id": 9
+      "id": 11
     }
   ]
 }

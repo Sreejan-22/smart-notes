@@ -1,31 +1,8 @@
 import { useEffect, useState } from "react";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import AcUnitOutlinedIcon from "@material-ui/icons/AcUnitOutlined";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import { makeStyles } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import NotesCard from "../NotesCard";
 import Masonry from "react-masonry-css";
 import "./Notes.css";
-
-// const useStyles = makeStyles({
-//   btn: {
-//     fontSize: 60,
-//     backgroundColor: "violet",
-//     "&:hover": {
-//       backgroundColor: "blue",
-//     },
-//   },
-
-//   customText: {
-//     textDecoration: "underline",
-//     margin: "auto",
-//   },
-// });
 
 const Notes = () => {
   // const classes = useStyles();
@@ -60,13 +37,6 @@ const Notes = () => {
   return (
     <div>
       <Container>
-        {/* <Grid container spacing={3}>
-          {notes.map((note) => (
-            <Grid item xs={12} md={6} lg={4} key={note.id}>
-              <NotesCard note={note} handleDelete={handleDelete} />
-            </Grid>
-          ))}
-        </Grid> */}
         <Masonry
           breakpointCols={breakPoints}
           className="my-masonry-grid"
