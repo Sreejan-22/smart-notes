@@ -4,4 +4,6 @@ A note taking application
 
 Tech Stack - React.js, Material UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![screenshot 1](https://github.com/Sreejan-22/smart-notes/blob/master/screenshots/smart-notes1.png)
+
+![screenshot 2](https://github.com/Sreejan-22/smart-notes/blob/master/screenshots/smart-notes2.png)
