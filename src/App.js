@@ -3,6 +3,8 @@ import "./App.css";
 import Notes from "./components/Notes/Notes";
 import Create from "./components/Create/Create";
 import Layout from "./components/Layout";
+import Login from "./components/Login/Login";
+import SignUp from "./components/Signup/Signup";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 // import { purple, yellow } from "@material-ui/core/colors";
 
@@ -31,6 +33,12 @@ const App = () => {
           <Switch>
             <Route path="/create">
               <Create />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
             <Route path="/">
               <Notes />
