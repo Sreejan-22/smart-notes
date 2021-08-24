@@ -13,11 +13,16 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
 import { format } from "date-fns";
+import Navbar from "./Navbar/Navbar";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => {
   return {
+    authPage: {
+      backgroundColor: "#f9f9f9",
+      width: "100%",
+    },
     root: {
       display: "flex",
     },

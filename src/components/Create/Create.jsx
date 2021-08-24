@@ -10,6 +10,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { useHistory } from "react-router-dom";
+import Layout from "../Layout";
 
 const useStyles = makeStyles({
   heading: {
@@ -75,73 +76,75 @@ const Create = () => {
   }
 
   return (
-    <Container>
-      <Typography variant="h4" align="center" className={classes.heading}>
-        Create a new note
-      </Typography>
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <TextField
-          className={classes.field}
-          label="Note Title"
-          variant="outlined"
-          fullWidth
-          required
-          onChange={(e) => setTitle(e.target.value)}
-          error={titleError}
-        />
-        <TextField
-          className={classes.field}
-          label="Details"
-          variant="outlined"
-          fullWidth
-          required
-          multiline
-          minRows={4}
-          maxRows={8}
-          onChange={(e) => setDetails(e.target.value)}
-          error={detailsError}
-        />
-        <FormControl className={classes.field}>
-          <FormLabel>
-            <Typography variant="h5">Note Category</Typography>
-          </FormLabel>
-          <RadioGroup
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            color="primary"
+    <Layout>
+      <Container>
+        <Typography variant="h4" align="center" className={classes.heading}>
+          Create a new note
+        </Typography>
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <TextField
+            className={classes.field}
+            label="Note Title"
+            variant="outlined"
+            fullWidth
+            required
+            onChange={(e) => setTitle(e.target.value)}
+            error={titleError}
+          />
+          <TextField
+            className={classes.field}
+            label="Details"
+            variant="outlined"
+            fullWidth
+            required
+            multiline
+            minRows={4}
+            maxRows={8}
+            onChange={(e) => setDetails(e.target.value)}
+            error={detailsError}
+          />
+          <FormControl className={classes.field}>
+            <FormLabel>
+              <Typography variant="h5">Note Category</Typography>
+            </FormLabel>
+            <RadioGroup
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              color="primary"
+            >
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                value="work"
+                label="Work"
+              />
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                value="todos"
+                label="Todos"
+              />
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                value="reminders"
+                label="Reminders"
+              />
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                value="money"
+                label="Money"
+              />
+            </RadioGroup>
+          </FormControl>
+          <Button
+            variant="contained"
+            type="submit"
+            // color="secondary"
+            // disableElevation
           >
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              value="work"
-              label="Work"
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              value="todos"
-              label="Todos"
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              value="reminders"
-              label="Reminders"
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              value="money"
-              label="Money"
-            />
-          </RadioGroup>
-        </FormControl>
-        <Button
-          variant="contained"
-          type="submit"
-          // color="secondary"
-          // disableElevation
-        >
-          Submit
-        </Button>
-      </form>
-    </Container>
+            Submit
+          </Button>
+        </form>
+      </Container>
+    </Layout>
   );
 };
 
