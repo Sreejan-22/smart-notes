@@ -10,10 +10,7 @@ import SubjectOutlinedIcon from "@material-ui/icons/SubjectOutlined";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Avatar from "@material-ui/core/Avatar";
-import PersonIcon from "@material-ui/icons/Person";
 import { format } from "date-fns";
-import Navbar from "./Navbar/Navbar";
 
 const drawerWidth = 240;
 
@@ -58,6 +55,7 @@ const useStyles = makeStyles((theme) => {
     },
     user: {
       color: "gray",
+      cursor: "pointer",
     },
     avatar: {
       marginLeft: theme.spacing(2),
@@ -92,10 +90,7 @@ const Layout = ({ children }) => {
           <Typography className={classes.date}>
             {format(new Date(), "do MMMM y")}
           </Typography>
-          <Typography className={classes.user}>User</Typography>
-          <Avatar className={classes.avatar}>
-            <PersonIcon />
-          </Avatar>
+          <Typography className={classes.user}>Logout</Typography>
         </Toolbar>
       </AppBar>
 
@@ -109,7 +104,11 @@ const Layout = ({ children }) => {
         }}
       >
         <div>
-          <Typography variant="h5" className={classes.title}>
+          <Typography
+            variant="h5"
+            className={classes.title}
+            onClick={() => history.push("/")}
+          >
             Smart Notes
           </Typography>
         </div>
