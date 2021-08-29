@@ -10,7 +10,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { notifyError, notifySuccess } from "../../utils/notifyToasts";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "../Layout";
 
@@ -41,32 +42,6 @@ const Create = () => {
   // they'll initially be false
   // if the user submits a blank value in any of the 2 fields, it will be assigned true
   // and the same will reflect in the "error" prop in the respective TextField material ui components
-
-  const notifyError = (message) => {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
-
-  const notifySuccess = (message) => {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
 
   function handleSubmit(e) {
     e.preventDefault();

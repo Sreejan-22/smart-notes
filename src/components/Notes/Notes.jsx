@@ -4,7 +4,8 @@ import Container from "@material-ui/core/Container";
 import NotesCard from "../NotesCard";
 import Masonry from "react-masonry-css";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { notifyError, notifyInfo } from "../../utils/notifyToasts";
 import "react-toastify/dist/ReactToastify.css";
 import "./Notes.css";
 import Layout from "../Layout";
@@ -59,32 +60,6 @@ const Notes = () => {
         }
       });
   }, []);
-
-  const notifyError = (message) => {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
-
-  const notifyInfo = (message) => {
-    toast.info(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
 
   const handleEdit = (index, note) => {
     const { title, details, category } = note;
