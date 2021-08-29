@@ -26,21 +26,16 @@ const useStyles = makeStyles({
   },
 });
 
-const Create = () => {
+const Update = ({ index, currTitle, currDetails, currCategory }) => {
   const classes = useStyles();
 
   const history = useHistory();
 
-  const [title, setTitle] = useState("");
-  const [details, setDetails] = useState("");
+  const [title, setTitle] = useState(currTitle);
+  const [details, setDetails] = useState(currDetails);
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
-  const [category, setCategory] = useState("work");
-
-  // error state variables for title and details
-  // they'll initially be false
-  // if the user submits a blank value in any of the 2 fields, it will be assigned true
-  // and the same will reflect in the "error" prop in the respective TextField material ui components
+  const [category, setCategory] = useState(currCategory);
 
   const notifyError = (message) => {
     toast.error(message, {
@@ -71,9 +66,6 @@ const Create = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // initialized to false in the beginning to handle the edge case when a user submits with a blank field(s)
-    // and fillls the field(s) and submits again
-    // if we don't set this false initially, for the above case, an error alert in the field(s) will persist
     setTitleError(false);
     setDetailsError(false);
 
@@ -86,8 +78,8 @@ const Create = () => {
     }
 
     if (title.length && details.length) {
-      fetch("http://localhost:3000/notes", {
-        method: "POST",
+      fetch(`http://localhost:3000/notes/${index}`, {
+        method: "PUT",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
           "Content-type": "application/json",
@@ -114,7 +106,7 @@ const Create = () => {
       <Layout>
         <Container>
           <Typography variant="h4" align="center" className={classes.heading}>
-            Create a new note
+            Update note
           </Typography>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
@@ -185,4 +177,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Update;

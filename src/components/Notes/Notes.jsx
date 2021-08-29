@@ -15,8 +15,8 @@ const useStyles = makeStyles({
     position: "absolute",
     top: "75px",
     left: "49%",
-    display: "flex",
-    justifyContent: "center",
+    // display: "flex",
+    // justifyContent: "center",
   },
   loader: {
     zIndex: "5",
@@ -63,7 +63,7 @@ const Notes = () => {
   const notifyError = (message) => {
     toast.error(message, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -76,7 +76,7 @@ const Notes = () => {
   const notifyInfo = (message) => {
     toast.info(message, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -84,6 +84,30 @@ const Notes = () => {
       progress: undefined,
       theme: "colored",
     });
+  };
+
+  const handleEdit = (index, note) => {
+    const { title, details, category } = note;
+    fetch(`http://localhost:3000/notes/${index}`, {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        details,
+        type: category,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          history.push("/");
+        } else {
+          notifyError(data.message);
+        }
+      });
   };
 
   const handleDelete = (index) => {
@@ -133,7 +157,9 @@ const Notes = () => {
                   <div item xs={12} md={6} lg={4} key={index}>
                     <NotesCard
                       note={note}
-                      handleDelete={() => handleDelete(index)}
+                      handleDelete={handleDelete}
+                      handleEdit={handleEdit}
+                      index={index}
                     />
                   </div>
                 ))}

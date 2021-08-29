@@ -8,6 +8,7 @@ import {
 import "./App.css";
 import Notes from "./components/Notes/Notes";
 import Create from "./components/Create/Create";
+import Update from "./components/Update/Update";
 import Login from "./components/Login/Login";
 import SignUp from "./components/Signup/Signup";
 import NotFound from "./components/NotFound/NotFound";
@@ -56,17 +57,20 @@ const App = () => {
         <ThemeProvider theme={theme}>
           <Router>
             <Switch>
+              <Route exact path="/notes">
+                <Notes />
+              </Route>
               <Route exact path="/create">
                 <Create />
+              </Route>
+              <Route exact path="/update/:index">
+                <Update />
               </Route>
               <Route exact path="/signup">
                 <SignUp />
               </Route>
               <Route exact path="/login">
                 <Login />
-              </Route>
-              <Route exact path="/notes">
-                <Notes />
               </Route>
               <Route exact path="/">
                 {localStorage.getItem("token") ? (

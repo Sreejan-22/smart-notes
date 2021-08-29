@@ -2,6 +2,7 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
+import EditOutlined from "@material-ui/icons/EditOutlined";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
@@ -25,8 +26,14 @@ const useStyles = makeStyles({
   },
 });
 
-const NotesCard = ({ note, handleDelete }) => {
+const NotesCard = ({ note, handleDelete, handleEdit, index }) => {
   const classes = useStyles(note);
+
+  const currNote = {
+    title: note.title,
+    details: note.details,
+    category: note.noteType,
+  };
 
   return (
     <div style={{ border: "none" }}>
@@ -38,9 +45,14 @@ const NotesCard = ({ note, handleDelete }) => {
             </Avatar>
           }
           action={
-            <IconButton onClick={() => handleDelete(note.id)}>
-              <DeleteOutlined />
-            </IconButton>
+            <>
+              <IconButton onClick={() => handleEdit(index, currNote)}>
+                <EditOutlined />
+              </IconButton>
+              <IconButton onClick={() => handleDelete(index)}>
+                <DeleteOutlined />
+              </IconButton>
+            </>
           }
           title={note.title}
           subheader={note.noteType}
