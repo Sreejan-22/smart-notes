@@ -82,6 +82,11 @@ const Layout = ({ children }) => {
     },
   ];
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    history.push("/login");
+  };
+
   return (
     <div className={classes.root}>
       {/* app bar */}
@@ -90,7 +95,9 @@ const Layout = ({ children }) => {
           <Typography className={classes.date}>
             {format(new Date(), "do MMMM y")}
           </Typography>
-          <Typography className={classes.user}>Logout</Typography>
+          <Typography className={classes.user} onClick={handleLogout}>
+            Logout
+          </Typography>
         </Toolbar>
       </AppBar>
 

@@ -9,27 +9,15 @@ import { makeStyles } from "@material-ui/core";
 import { yellow, green, blue, orange } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
-  test: {
-    // border: (note) => {
-    //   if (note.category == "work") {
-    //     return "1px solid red";
-    //   }
-    // },
-    // boxShadow: (note) => {
-    //   if (note.category == "work") {
-    //     return "none";
-    //   }
-    // },
-  },
   avatar: {
     backgroundColor: (note) => {
-      if (note.category == "work") {
+      if (note.noteType == "work") {
         return yellow[700];
       }
-      if (note.category == "money") {
+      if (note.noteType == "money") {
         return green[500];
       }
-      if (note.category == "todos") {
+      if (note.noteType == "todos") {
         return blue[500];
       }
       return orange[900];
@@ -41,12 +29,12 @@ const NotesCard = ({ note, handleDelete }) => {
   const classes = useStyles(note);
 
   return (
-    <div>
-      <Card elevation={1} className={classes.test}>
+    <div style={{ border: "none" }}>
+      <Card elevation={1}>
         <CardHeader
           avatar={
             <Avatar className={classes.avatar}>
-              {note.category[0].toUpperCase()}
+              {note.noteType[0].toUpperCase()}
             </Avatar>
           }
           action={
@@ -55,7 +43,7 @@ const NotesCard = ({ note, handleDelete }) => {
             </IconButton>
           }
           title={note.title}
-          subheader={note.category}
+          subheader={note.noteType}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary">
