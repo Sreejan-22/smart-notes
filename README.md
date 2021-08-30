@@ -11,7 +11,7 @@ Tech Stack
 Features
 
 - Create, update, delete notes
-- Signup, Login
+- Signup, Login (authentication implemented using JWT)
 
 Backend part of the project can be found [here](https://github.com/Sreejan-22/smart-notes-backend)
 
