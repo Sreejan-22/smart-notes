@@ -26,66 +26,39 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     fetch("http://localhost:3000/notes", {
-  //       headers: {
-  //         Authorization: "Bearer " + localStorage.getItem("token"),
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((jsonData) => {
-  //         if (jsonData.isLoggedIn) {
-  //           setIsAuthenticated(true);
-  //         }
-  //         setLoading(false);
-  //       });
-  //   } else {
-  //     setLoading(false);
-  //   }
-  // }, []);
-
   return (
     <>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <ThemeProvider theme={theme}>
-          <Router>
-            <Switch>
-              <Route exact path="/notes">
-                <Notes />
-              </Route>
-              <Route exact path="/create">
-                <Create />
-              </Route>
-              <Route exact path="/edit/:index">
-                <Edit />
-              </Route>
-              <Route exact path="/signup">
-                <SignUp />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-              <Route exact path="/">
-                {localStorage.getItem("token") ? (
-                  <Redirect to="/notes" />
-                ) : (
-                  <Redirect to="/login" />
-                )}
-              </Route>
-              <Route path="/">
-                <NotFound />
-              </Route>
-            </Switch>
-          </Router>
-        </ThemeProvider>
-      )}
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Switch>
+            <Route exact path="/notes">
+              <Notes />
+            </Route>
+            <Route exact path="/create">
+              <Create />
+            </Route>
+            <Route exact path="/edit/:index">
+              <Edit />
+            </Route>
+            <Route exact path="/signup">
+              <SignUp />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/">
+              {localStorage.getItem("token") ? (
+                <Redirect to="/notes" />
+              ) : (
+                <Redirect to="/login" />
+              )}
+            </Route>
+            <Route path="/">
+              <NotFound />
+            </Route>
+          </Switch>
+        </Router>
+      </ThemeProvider>
     </>
   );
 };
