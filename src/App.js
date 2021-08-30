@@ -8,7 +8,7 @@ import {
 import "./App.css";
 import Notes from "./components/Notes/Notes";
 import Create from "./components/Create/Create";
-import Update from "./components/Update/Update";
+import Edit from "./components/Edit/Edit";
 import Login from "./components/Login/Login";
 import SignUp from "./components/Signup/Signup";
 import NotFound from "./components/NotFound/NotFound";
@@ -63,8 +63,8 @@ const App = () => {
               <Route exact path="/create">
                 <Create />
               </Route>
-              <Route exact path="/update/:index">
-                <Update />
+              <Route exact path="/edit/:index">
+                <Edit />
               </Route>
               <Route exact path="/signup">
                 <SignUp />

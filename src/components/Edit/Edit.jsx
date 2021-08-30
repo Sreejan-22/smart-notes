@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -27,16 +26,18 @@ const useStyles = makeStyles({
   },
 });
 
-const Update = ({ index, currTitle, currDetails, currCategory }) => {
+const Edit = ({ currTitle, currDetails, currCategory, index, handleEdit }) => {
   const classes = useStyles();
-
-  const history = useHistory();
 
   const [title, setTitle] = useState(currTitle);
   const [details, setDetails] = useState(currDetails);
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
   const [category, setCategory] = useState(currCategory);
+
+  // useEffect(() => {
+  //   console.log(noteToEdit);
+  // });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -53,26 +54,12 @@ const Update = ({ index, currTitle, currDetails, currCategory }) => {
     }
 
     if (title.length && details.length) {
-      fetch(`http://localhost:3000/notes/${index}`, {
-        method: "PUT",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          details,
-          type: category,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status === "ok") {
-            history.push("/notes");
-          } else {
-            notifyError(data.message);
-          }
-        });
+      const note = {
+        title,
+        details,
+        category,
+      };
+      handleEdit(index, note);
     }
   }
 
@@ -81,7 +68,7 @@ const Update = ({ index, currTitle, currDetails, currCategory }) => {
       <Layout>
         <Container>
           <Typography variant="h4" align="center" className={classes.heading}>
-            Update note
+            Edit note
           </Typography>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
@@ -90,6 +77,7 @@ const Update = ({ index, currTitle, currDetails, currCategory }) => {
               variant="outlined"
               fullWidth
               required
+              defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}
               error={titleError}
             />
@@ -102,6 +90,7 @@ const Update = ({ index, currTitle, currDetails, currCategory }) => {
               multiline
               minRows={4}
               maxRows={8}
+              defaultValue={details}
               onChange={(e) => setDetails(e.target.value)}
               error={detailsError}
             />
@@ -152,4 +141,4 @@ const Update = ({ index, currTitle, currDetails, currCategory }) => {
   );
 };
 
-export default Update;
+export default Edit;

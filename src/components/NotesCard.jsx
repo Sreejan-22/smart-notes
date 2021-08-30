@@ -12,13 +12,13 @@ import { yellow, green, blue, orange } from "@material-ui/core/colors";
 const useStyles = makeStyles({
   avatar: {
     backgroundColor: (note) => {
-      if (note.noteType == "work") {
+      if (note.category === "work") {
         return yellow[700];
       }
-      if (note.noteType == "money") {
+      if (note.category === "money") {
         return green[500];
       }
-      if (note.noteType == "todos") {
+      if (note.category === "todos") {
         return blue[500];
       }
       return orange[900];
@@ -26,14 +26,8 @@ const useStyles = makeStyles({
   },
 });
 
-const NotesCard = ({ note, handleDelete, handleEdit, index }) => {
+const NotesCard = ({ note, handleDelete, setEditing, index, noteToEdit }) => {
   const classes = useStyles(note);
-
-  const currNote = {
-    title: note.title,
-    details: note.details,
-    category: note.noteType,
-  };
 
   return (
     <div style={{ border: "none" }}>
@@ -41,12 +35,24 @@ const NotesCard = ({ note, handleDelete, handleEdit, index }) => {
         <CardHeader
           avatar={
             <Avatar className={classes.avatar}>
-              {note.noteType[0].toUpperCase()}
+              {note.category[0].toUpperCase()}
             </Avatar>
           }
           action={
             <>
-              <IconButton onClick={() => handleEdit(index, currNote)}>
+              <IconButton
+                onClick={() => {
+                  const currentNote = {
+                    title: note.title,
+                    details: note.details,
+                    category: note.category,
+                    index,
+                  };
+                  noteToEdit.current = currentNote;
+                  console.log(noteToEdit);
+                  setEditing(true);
+                }}
+              >
                 <EditOutlined />
               </IconButton>
               <IconButton onClick={() => handleDelete(index)}>
@@ -55,7 +61,7 @@ const NotesCard = ({ note, handleDelete, handleEdit, index }) => {
             </>
           }
           title={note.title}
-          subheader={note.noteType}
+          subheader={note.category}
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary">

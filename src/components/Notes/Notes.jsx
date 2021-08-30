@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import NotesCard from "../NotesCard";
@@ -9,13 +9,13 @@ import { notifyError, notifyInfo } from "../../utils/notifyToasts";
 import "react-toastify/dist/ReactToastify.css";
 import "./Notes.css";
 import Layout from "../Layout";
-import { useHistory } from "react-router-dom";
+import Edit from "../Edit/Edit";
 
 const useStyles = makeStyles({
   loaderWrapper: {
     position: "absolute",
-    top: "75px",
-    left: "49%",
+    top: "125px",
+    // left: "55%",
     // display: "flex",
     // justifyContent: "center",
   },
@@ -37,7 +37,8 @@ const Notes = () => {
   const classes = useStyles();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const history = useHistory();
+  const [editing, setEditing] = useState(false);
+  const noteToEdit = useRef();
 
   useEffect(() => {
     fetch("http://localhost:3000/notes", {
@@ -48,20 +49,20 @@ const Notes = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.isLoggedIn) {
+        if (data.status === "ok") {
           if (data.notes) {
-            setNotes(data.notes.notes);
+            setNotes(data.notes);
           }
           setLoading(false);
         } else {
-          notifyError(data.message);
           setLoading(false);
-          history.push("/login");
+          notifyError(data.message);
         }
       });
   }, []);
 
   const handleEdit = (index, note) => {
+    setLoading(true);
     const { title, details, category } = note;
     fetch(`http://localhost:3000/notes/${index}`, {
       method: "PUT",
@@ -72,13 +73,16 @@ const Notes = () => {
       body: JSON.stringify({
         title,
         details,
-        type: category,
+        category,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
-          history.push("/");
+          setNotes(data.notes);
+          setEditing(false);
+          setLoading(false);
+          noteToEdit.current = null;
         } else {
           notifyError(data.message);
         }
@@ -96,7 +100,7 @@ const Notes = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
-          setNotes(data.newNotes.notes);
+          setNotes(data.updatedNotes);
           notifyInfo("Note deleted!");
         } else {
           notifyError(data.message);
@@ -114,11 +118,22 @@ const Notes = () => {
     <>
       {loading ? (
         <>
-          <div className={classes.loaderWrapper}>
-            <CircularProgress className={classes.loader} />
-          </div>
-          <div className={classes.wrapper}></div>
+          <Layout>
+            <div className={classes.loaderWrapper}>
+              {/* <CircularProgress className={classes.loader} /> */}
+              <h2 style={{ textAlign: "center" }}>Loading...</h2>
+            </div>
+          </Layout>
+          {/* <div className={classes.wrapper}></div> */}
         </>
+      ) : editing ? (
+        <Edit
+          currTitle={noteToEdit.current.title}
+          currDetails={noteToEdit.current.details}
+          currCategory={noteToEdit.current.category}
+          index={noteToEdit.current.index}
+          handleEdit={handleEdit}
+        />
       ) : (
         <Layout>
           <div>
@@ -133,8 +148,9 @@ const Notes = () => {
                     <NotesCard
                       note={note}
                       handleDelete={handleDelete}
-                      handleEdit={handleEdit}
+                      setEditing={setEditing}
                       index={index}
+                      noteToEdit={noteToEdit}
                     />
                   </div>
                 ))}

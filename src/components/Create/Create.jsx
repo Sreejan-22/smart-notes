@@ -70,7 +70,7 @@ const Create = () => {
         body: JSON.stringify({
           title,
           details,
-          type: category,
+          category,
         }),
       })
         .then((res) => res.json())
@@ -100,6 +100,7 @@ const Create = () => {
               required
               onChange={(e) => setTitle(e.target.value)}
               error={titleError}
+              helperText={titleError ? "this field must not be empty" : null}
             />
             <TextField
               className={classes.field}
@@ -112,6 +113,7 @@ const Create = () => {
               maxRows={8}
               onChange={(e) => setDetails(e.target.value)}
               error={detailsError}
+              helperText={detailsError ? "this field must not be empty" : null}
             />
             <FormControl className={classes.field}>
               <FormLabel>
