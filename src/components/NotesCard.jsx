@@ -8,22 +8,45 @@ import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core";
 import { yellow, green, blue, orange } from "@material-ui/core/colors";
+import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
-const useStyles = makeStyles({
-  avatar: {
-    backgroundColor: (note) => {
-      if (note.category === "work") {
-        return yellow[700];
-      }
-      if (note.category === "money") {
-        return green[500];
-      }
-      if (note.category === "todos") {
-        return blue[500];
-      }
-      return orange[900];
+const useStyles = makeStyles((theme) => {
+  return {
+    avatar: {
+      backgroundColor: (note) => {
+        if (note.category === "work") {
+          return yellow[700];
+        }
+        if (note.category === "money") {
+          return green[500];
+        }
+        if (note.category === "todos") {
+          return blue[500];
+        }
+        return orange[900];
+      },
     },
-  },
+    editButton: {
+      // display: "inherit",
+      [theme.breakpoints.down("sm")]: {
+        display: "none",
+      },
+    },
+    deleteButton: {
+      // display: "inherit",
+      [theme.breakpoints.down("sm")]: {
+        display: "none",
+      },
+    },
+    noteMenuButton: {
+      // display: "inherit",
+      [theme.breakpoints.up("md")]: {
+        display: "none",
+      },
+    },
+  };
 });
 
 const NotesCard = ({ note, handleDelete, setEditing, index, noteToEdit }) => {
@@ -41,6 +64,7 @@ const NotesCard = ({ note, handleDelete, setEditing, index, noteToEdit }) => {
           action={
             <>
               <IconButton
+                className={classes.editButton}
                 onClick={() => {
                   const currentNote = {
                     title: note.title,
@@ -55,8 +79,14 @@ const NotesCard = ({ note, handleDelete, setEditing, index, noteToEdit }) => {
               >
                 <EditOutlined />
               </IconButton>
-              <IconButton onClick={() => handleDelete(index)}>
+              <IconButton
+                className={classes.deleteButton}
+                onClick={() => handleDelete(index)}
+              >
                 <DeleteOutlined />
+              </IconButton>
+              <IconButton className={classes.noteMenuButton}>
+                <MoreVertOutlinedIcon />
               </IconButton>
             </>
           }
