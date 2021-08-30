@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => {
       flexGrow: 1,
       color: "gray",
     },
-    user: {
+    logout: {
       color: "gray",
       cursor: "pointer",
     },
@@ -95,7 +95,7 @@ const Layout = ({ children }) => {
           <Typography className={classes.date}>
             {format(new Date(), "do MMMM y")}
           </Typography>
-          <Typography className={classes.user} onClick={handleLogout}>
+          <Typography className={classes.logou} onClick={handleLogout}>
             Logout
           </Typography>
         </Toolbar>
@@ -127,7 +127,9 @@ const Layout = ({ children }) => {
               key={item.text}
               button
               onClick={() => history.push(item.path)}
-              className={location.pathname == item.path ? classes.active : null}
+              className={
+                location.pathname === item.path ? classes.active : null
+              }
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text}></ListItemText>

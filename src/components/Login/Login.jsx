@@ -142,6 +142,7 @@ export default function Login() {
                 setEmail(e.target.value);
               }}
               error={emailError}
+              helperText={emailError ? "this field must not be empty" : null}
             />
             <TextField
               variant="outlined"
@@ -158,6 +159,7 @@ export default function Login() {
                 setPassword(e.target.value);
               }}
               error={passwordError}
+              helperText={passwordError ? "this field must not be empty" : null}
             />
             <Button
               type="submit"
