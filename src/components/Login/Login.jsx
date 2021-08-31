@@ -88,7 +88,7 @@ export default function Login() {
       console.log(email);
       console.log(password);
       setLoading(true);
-      fetch("http://localhost:3000/login", {
+      fetch("https://smart-notes-backend.herokuapp.com/login", {
         method: "POST",
         body: JSON.stringify({
           email,

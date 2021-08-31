@@ -90,7 +90,7 @@ export default function SignUp() {
       console.log(email);
       console.log(password);
       setLoading(true);
-      fetch("http://localhost:3000/signup", {
+      fetch("https://smart-notes-backend.herokuapp.com/signup", {
         method: "POST",
         body: JSON.stringify({
           email,
@@ -120,6 +120,10 @@ export default function SignUp() {
               notifyError(data.message);
             }
           }
+        })
+        .catch((err) => {
+          setLoading(false);
+          notifyError("There seems to be an error!!");
         });
     }
   };
