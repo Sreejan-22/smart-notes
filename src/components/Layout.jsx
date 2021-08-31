@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -10,11 +11,15 @@ import SubjectOutlinedIcon from "@material-ui/icons/SubjectOutlined";
 import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOutlined";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
 import MenuOutlinedIcon from "@material-ui/icons/MenuOutlined";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import { format } from "date-fns";
 
 const drawerWidth = 240;
 const drawerWidthMd = 180;
+const drawerWidthXl = 360;
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -28,19 +33,31 @@ const useStyles = makeStyles((theme) => {
     page: {
       backgroundColor: "#f9f9f9",
       width: "100%",
-      height: "100vh",
+      height: window.document.documentElement.scrollHeight,
       padding: theme.spacing(3),
     },
     drawer: {
       width: drawerWidth,
-      [theme.breakpoints.down("md")]: {
+      [theme.breakpoints.up("xl")]: {
+        width: drawerWidthXl,
+      },
+      [theme.breakpoints.between("sm", "md")]: {
         width: drawerWidthMd,
+      },
+      [theme.breakpoints.only("xs")]: {
+        display: "none",
       },
     },
     drawerPaper: {
       width: drawerWidth,
-      [theme.breakpoints.down("md")]: {
+      [theme.breakpoints.up("xl")]: {
+        width: drawerWidthXl,
+      },
+      [theme.breakpoints.between("sm", "md")]: {
         width: drawerWidthMd,
+      },
+      [theme.breakpoints.only("xs")]: {
+        display: "none",
       },
     },
     active: {
@@ -50,10 +67,24 @@ const useStyles = makeStyles((theme) => {
       padding: theme.spacing(2),
       cursor: "pointer",
     },
+    titleMobile: {
+      flexGrow: 1,
+      padding: theme.spacing(2),
+      cursor: "pointer",
+      [theme.breakpoints.up("sm")]: {
+        display: "none",
+      },
+    },
     appbar: {
       width: `calc(100% - ${drawerWidth}px)`,
-      [theme.breakpoints.down("md")]: {
+      [theme.breakpoints.up("xl")]: {
+        width: `calc(100% - ${drawerWidthXl}px)`,
+      },
+      [theme.breakpoints.between("sm", "md")]: {
         width: `calc(100% - ${drawerWidthMd}px)`,
+      },
+      [theme.breakpoints.only("xs")]: {
+        width: `100%`,
       },
     },
     // we are using mixins here
@@ -64,14 +95,26 @@ const useStyles = makeStyles((theme) => {
     date: {
       flexGrow: 1,
       color: "gray",
+      [theme.breakpoints.only("xs")]: {
+        display: "none",
+      },
     },
     logout: {
       color: "gray",
       cursor: "pointer",
+      [theme.breakpoints.only("xs")]: {
+        display: "none",
+      },
     },
     avatar: {
       marginLeft: theme.spacing(2),
       cursor: "pointer",
+    },
+    menuButton: {
+      display: "block",
+      [theme.breakpoints.up("sm")]: {
+        display: "none",
+      },
     },
   };
 });
@@ -80,6 +123,7 @@ const Layout = ({ children }) => {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const menuItems = [
     {
@@ -94,6 +138,14 @@ const Layout = ({ children }) => {
     },
   ];
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     history.push("/login");
@@ -107,9 +159,43 @@ const Layout = ({ children }) => {
           <Typography className={classes.date}>
             {format(new Date(), "do MMMM y")}
           </Typography>
+          <Typography
+            variant="h5"
+            className={classes.titleMobile}
+            onClick={() => history.push("/notes")}
+          >
+            Smart Notes
+          </Typography>
           <Typography className={classes.logout} onClick={handleLogout}>
             Logout
           </Typography>
+          <IconButton className={classes.menuButton} onClick={handleClick}>
+            <MenuOutlinedIcon />
+          </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                history.push("/create");
+              }}
+            >
+              Create note
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                handleLogout();
+              }}
+            >
+              Logout
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
 
