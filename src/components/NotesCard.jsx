@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -51,6 +52,15 @@ const useStyles = makeStyles((theme) => {
 
 const NotesCard = ({ note, handleDelete, setEditing, index, noteToEdit }) => {
   const classes = useStyles(note);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div style={{ border: "none" }}>
@@ -73,7 +83,6 @@ const NotesCard = ({ note, handleDelete, setEditing, index, noteToEdit }) => {
                     index,
                   };
                   noteToEdit.current = currentNote;
-                  console.log(noteToEdit);
                   setEditing(true);
                 }}
               >
@@ -85,9 +94,45 @@ const NotesCard = ({ note, handleDelete, setEditing, index, noteToEdit }) => {
               >
                 <DeleteOutlined />
               </IconButton>
-              <IconButton className={classes.noteMenuButton}>
+              <IconButton
+                className={classes.noteMenuButton}
+                onClick={handleClick}
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+              >
                 <MoreVertOutlinedIcon />
               </IconButton>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    const currentNote = {
+                      title: note.title,
+                      details: note.details,
+                      category: note.category,
+                      index,
+                    };
+                    noteToEdit.current = currentNote;
+                    setEditing(true);
+                  }}
+                >
+                  Edit
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    handleDelete(index);
+                  }}
+                >
+                  Delete
+                </MenuItem>
+              </Menu>
             </>
           }
           title={note.title}

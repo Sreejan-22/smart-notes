@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Notes.css";
 import Layout from "../Layout";
 import Edit from "../Edit/Edit";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   loaderWrapper: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles({
 
 const Notes = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -55,8 +57,14 @@ const Notes = () => {
           }
           setLoading(false);
         } else {
-          setLoading(false);
-          notifyError(data.message);
+          if ("isLoggedIn" in data) {
+            if (!data.isLoggedIn) {
+              setLoading(false);
+              history.push("/login");
+            }
+          } else {
+            notifyError(data.message);
+          }
         }
       });
   }, []);

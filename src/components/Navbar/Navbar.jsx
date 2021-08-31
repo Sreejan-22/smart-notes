@@ -29,7 +29,11 @@ export default function Navbar() {
             variant="h5"
             className={classes.title}
             onClick={() => {
-              history.push("/");
+              if (localStorage.getItem("token")) {
+                history.push("/notes");
+              } else {
+                window.location.reload();
+              }
             }}
           >
             Smart Notes

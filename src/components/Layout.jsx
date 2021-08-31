@@ -85,7 +85,7 @@ const Layout = ({ children }) => {
     {
       text: "My Notes",
       icon: <SubjectOutlinedIcon />,
-      path: "/",
+      path: "/notes",
     },
     {
       text: "Create Note",
@@ -126,7 +126,7 @@ const Layout = ({ children }) => {
           <Typography
             variant="h5"
             className={classes.title}
-            onClick={() => history.push("/")}
+            onClick={() => history.push("/notes")}
           >
             Smart Notes
           </Typography>

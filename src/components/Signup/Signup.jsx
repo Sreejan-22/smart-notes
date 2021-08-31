@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
   loaderWrapper: {
     position: "absolute",
-    top: "30px",
-    left: "45%",
+    top: "40px",
+    left: "50%",
     display: "flex",
     justifyContent: "center",
   },
@@ -65,6 +65,12 @@ export default function SignUp() {
   const [emailErrorText, setEmailErrorText] = useState(null);
   const [passwordErrorText, setPasswordErrorText] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      history.push("/notes");
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
