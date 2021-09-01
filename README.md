@@ -2,6 +2,10 @@
 
 A note taking application
 
+The project is live here: https://smart-notes.netlify.app/
+
+Backend part of the project has been deployed here: https://github.com/Sreejan-22/smart-notes-backend
+
 Tech Stack
 
 - React.js
@@ -12,8 +16,6 @@ Features
 
 - Create, update, delete notes
 - Signup, Login (authentication implemented using JWT)
-
-Backend part of the project can be found [here](https://github.com/Sreejan-22/smart-notes-backend)
 
 ![screenshot 1](https://github.com/Sreejan-22/smart-notes/blob/master/screenshots/smart-notes1.png)
 
