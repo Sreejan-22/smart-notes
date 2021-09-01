@@ -35,10 +35,6 @@ const Edit = ({ currTitle, currDetails, currCategory, index, handleEdit }) => {
   const [detailsError, setDetailsError] = useState(false);
   const [category, setCategory] = useState(currCategory);
 
-  // useEffect(() => {
-  //   console.log(noteToEdit);
-  // });
-
   function handleSubmit(e) {
     e.preventDefault();
 

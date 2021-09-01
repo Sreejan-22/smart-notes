@@ -43,7 +43,7 @@ const Notes = () => {
   const noteToEdit = useRef();
 
   useEffect(() => {
-    fetch("https://smart-notes-backend.herokuapp.com/notes", {
+    fetch("https://api-smart-notes.herokuapp.com/notes", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ const Notes = () => {
   const handleEdit = (index, note) => {
     setLoading(true);
     const { title, details, category } = note;
-    fetch(`https://smart-notes-backend.herokuapp.com/notes/${index}`, {
+    fetch(`https://api-smart-notes.herokuapp.com/notes/${index}`, {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -98,7 +98,7 @@ const Notes = () => {
   };
 
   const handleDelete = (index) => {
-    fetch(`https://smart-notes-backend.herokuapp.com/notes/${index}`, {
+    fetch(`https://api-smart-notes.herokuapp.com/notes/${index}`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

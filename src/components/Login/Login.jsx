@@ -85,10 +85,8 @@ export default function Login() {
     }
 
     if (email.length && password.length) {
-      console.log(email);
-      console.log(password);
       setLoading(true);
-      fetch("https://smart-notes-backend.herokuapp.com/login", {
+      fetch("https://api-smart-notes.herokuapp.com/login", {
         method: "POST",
         body: JSON.stringify({
           email,
