@@ -24,4 +24,4 @@ yarn-error.log*
 
 learnings.txt
 
-data/db.json
+data/*
