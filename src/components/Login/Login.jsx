@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { ToastContainer } from "react-toastify";
-import { notifySuccess, notifyError } from "../../utils/notifyToasts";
+import { notifyError } from "../../utils/notifyToasts";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar/Navbar";
 
@@ -58,63 +58,64 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
-  const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const { push } = useHistory();
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      history.push("/notes");
+      push("/notes");
     }
+  }, [push]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const handleInputChange = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setEmailError(false);
-    setPasswordError(false);
-
-    if (!email.length) {
-      setEmailError(true);
+  const toggleLoading = (type, value) => {
+    if (type === "guest") {
+      setLoading(value);
+    } else {
+      setLoginData({ ...loginData, isSubmitting: value });
     }
+  };
 
-    if (!password.length) {
-      setPasswordError(true);
-    }
+  const handleSubmit = (isGuestLogin) => {
+    const type = isGuestLogin ? "guest" : "user";
+    const jsonData = isGuestLogin
+      ? {
+          email: "test@test.com",
+          password: "Test123@",
+        }
+      : { email: loginData.email, password: loginData.password };
 
-    if (email.length && password.length) {
-      setLoading(true);
-      fetch("https://api-smart-notes.herokuapp.com/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
+    toggleLoading(type, true);
+
+    fetch("https://api-smart-notes.herokuapp.com/login", {
+      method: "POST",
+      body: JSON.stringify(jsonData),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "ok") {
+          localStorage.setItem("token", data.token);
+          toggleLoading(type, false);
+          push("/notes");
+        } else {
+          toggleLoading(type, false);
+          notifyError(data.message);
+        }
       })
-        .then((res) => res.json())
-        .then((data) => {
-          setLoading(false);
-          if (data.status === "ok") {
-            localStorage.setItem("token", data.token);
-            history.push("/notes");
-            notifySuccess("Welcome!");
-          } else {
-            if (data.status === "error") {
-              notifyError(data.message);
-            } else if (data.status === "serverError") {
-              notifyError(data.message);
-            }
-          }
-        });
-    }
+      .catch((err) => {
+        toggleLoading(type, false);
+        notifyError("Something went wrong");
+      });
   };
 
   return (
@@ -133,7 +134,13 @@ export default function Login() {
           >
             Login
           </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <form
+            className={classes.form}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit(false);
+            }}
+          >
             <TextField
               variant="outlined"
               margin="normal"
@@ -145,11 +152,9 @@ export default function Login() {
               autoComplete="email"
               autoFocus
               style={{ paddingBottom: "1rem" }}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              error={emailError}
-              helperText={emailError ? "this field must not be empty" : null}
+              value={loginData.email}
+              onChange={handleInputChange}
+              disabled={loading}
             />
             <TextField
               variant="outlined"
@@ -162,11 +167,9 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
               style={{ paddingBottom: "1rem" }}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              error={passwordError}
-              helperText={passwordError ? "this field must not be empty" : null}
+              value={loginData.password}
+              onChange={handleInputChange}
+              disabled={loading}
             />
             <Button
               type="submit"
@@ -174,8 +177,23 @@ export default function Login() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={loading}
             >
               Login
+            </Button>
+            <p style={{ textAlign: "center" }}>Or</p>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit(true);
+              }}
+              disabled={loading}
+            >
+              Login with test credentials
             </Button>
             <Grid container>
               <Grid item xs>
