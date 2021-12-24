@@ -61,7 +61,7 @@ const Create = () => {
     }
 
     if (title.length && details.length) {
-      fetch("https://api-smart-notes.herokuapp.com/notes", {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/notes`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

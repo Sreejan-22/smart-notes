@@ -74,7 +74,7 @@ export default function SignUp() {
 
     if (email.length && password.length) {
       setLoading(true);
-      fetch("https://api-smart-notes.herokuapp.com/signup", {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
         method: "POST",
         body: JSON.stringify({
           email,

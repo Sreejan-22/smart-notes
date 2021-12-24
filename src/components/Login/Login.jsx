@@ -87,14 +87,14 @@ export default function Login() {
     const type = isGuestLogin ? "guest" : "user";
     const jsonData = isGuestLogin
       ? {
-          email: "test@test.com",
-          password: "Test123@",
+          email: process.env.REACT_APP_TEST_EMAIL,
+          password: process.env.REACT_APP_TEST_PASSWORD,
         }
       : { email: loginData.email, password: loginData.password };
 
     toggleLoading(type, true);
 
-    fetch("https://api-smart-notes.herokuapp.com/login", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
       method: "POST",
       body: JSON.stringify(jsonData),
       headers: {
