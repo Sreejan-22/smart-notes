@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { ToastContainer } from "react-toastify";
-import { notifyError } from "../../utils/notifyToasts";
+import { notifyError, notifySuccess } from "../../utils/notifyToasts";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar/Navbar";
 
@@ -107,6 +107,7 @@ export default function Login() {
           localStorage.setItem("token", data.token);
           toggleLoading(type, false);
           push("/notes");
+          notifySuccess("Welcome!");
         } else {
           toggleLoading(type, false);
           notifyError(data.message);
