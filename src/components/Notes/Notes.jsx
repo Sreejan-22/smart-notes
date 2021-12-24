@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import NotesCard from "../NotesCard";
 import Masonry from "react-masonry-css";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { ToastContainer } from "react-toastify";
 import { notifyError, notifyInfo } from "../../utils/notifyToasts";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,7 +35,7 @@ const useStyles = makeStyles({
 
 const Notes = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const { push } = useHistory();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -60,14 +59,14 @@ const Notes = () => {
           if ("isLoggedIn" in data) {
             if (!data.isLoggedIn) {
               setLoading(false);
-              history.push("/login");
+              push("/login");
             }
           } else {
             notifyError(data.message);
           }
         }
       });
-  }, []);
+  }, [push]);
 
   const handleEdit = (index, note) => {
     setLoading(true);

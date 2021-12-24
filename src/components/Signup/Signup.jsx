@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    textTransform: "capitalize",
   },
   loaderWrapper: {
     position: "absolute",
@@ -57,34 +58,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const history = useHistory();
+  const { push } = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [emailErrorText, setEmailErrorText] = useState(null);
-  const [passwordErrorText, setPasswordErrorText] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      history.push("/notes");
+      push("/notes");
     }
-  }, []);
+  }, [push]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    setEmailError(false);
-    setPasswordError(false);
-
-    if (!email.length) {
-      setEmailError(true);
-    }
-
-    if (!password.length) {
-      setPasswordError(true);
-    }
 
     if (email.length && password.length) {
       setLoading(true);
@@ -103,7 +89,7 @@ export default function SignUp() {
           setLoading(false);
           if (data.status === "ok") {
             localStorage.setItem("token", data.token);
-            history.push("/notes");
+            push("/notes");
             notifySuccess("Welcome!");
           } else {
             if (data.status === "error") {
@@ -147,36 +133,32 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
+                  required={true}
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
-                  autoComplete="email"
                   style={{ paddingBottom: "1rem" }}
+                  value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
-                  error={emailError}
-                  helperText={emailErrorText}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
+                  required={true}
                   fullWidth
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="current-password"
                   style={{ paddingBottom: "1rem" }}
+                  value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
-                  error={passwordError}
-                  helperText={passwordErrorText}
                 />
               </Grid>
             </Grid>

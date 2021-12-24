@@ -11,7 +11,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { ToastContainer } from "react-toastify";
-import { notifyError, notifySuccess } from "../../utils/notifyToasts";
+import { notifyError } from "../../utils/notifyToasts";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "../Layout";
 
