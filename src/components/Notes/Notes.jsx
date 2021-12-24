@@ -151,7 +151,7 @@ const Notes = () => {
                 columnClassName="my-masonry-grid_column"
               >
                 {notes.map((note, index) => (
-                  <div item xs={12} md={6} lg={4} key={index}>
+                  <div xs={12} md={6} lg={4} key={index}>
                     <NotesCard
                       note={note}
                       handleDelete={handleDelete}
