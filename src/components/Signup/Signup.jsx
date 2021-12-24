@@ -128,12 +128,12 @@ export default function SignUp() {
           >
             Sign up
           </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required={true}
+                  required
                   fullWidth
                   id="email"
                   label="Email"
@@ -148,7 +148,7 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required={true}
+                  required
                   fullWidth
                   name="password"
                   label="Password"
