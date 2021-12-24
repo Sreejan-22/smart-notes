@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    textTransform: "capitalize",
   },
   loaderWrapper: {
     position: "absolute",
@@ -68,6 +69,8 @@ export default function Login() {
     if (localStorage.getItem("token")) {
       history.push("/notes");
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = (e) => {
@@ -176,9 +179,7 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+                <div></div>
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
