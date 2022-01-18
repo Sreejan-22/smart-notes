@@ -1,5 +1,7 @@
 # smart-notes
 
+### Check out the demo video [here](https://youtu.be/oTq49wypGlw)
+
 ### About
 
 Smart Notes is a note taking web application
