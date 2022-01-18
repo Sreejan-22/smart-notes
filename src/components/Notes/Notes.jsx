@@ -97,6 +97,10 @@ const Notes = () => {
   };
 
   const handleDelete = (index) => {
+    if (!window.confirm("Do you want to delete this note?")) {
+      return;
+    }
+
     fetch(`${process.env.REACT_APP_BACKEND_URL}/notes/${index}`, {
       method: "DELETE",
       headers: {
