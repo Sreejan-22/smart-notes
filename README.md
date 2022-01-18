@@ -19,9 +19,7 @@ Code for the backend of the application can be found [here](https://github.com/S
 
 **Backend** - Express, MongoDB + Mongoose
 
-![screenshot 1](https://github.com/Sreejan-22/smart-notes/blob/master/screenshots/smart-notes1.png)
-
-![screenshot 2](https://github.com/Sreejan-22/smart-notes/blob/master/screenshots/smart-notes2.png)
+![screenshot 1](https://github.com/Sreejan-22/smart-notes/blob/master/screenshots/smartnotes.png)
 
 ### Contact
 
